@@ -14,10 +14,10 @@
         "dialect": "postgres"
     },
     "production": {
-        "username": "process.env.USER",
-        "password": "process.env.PASSWORD",
-        "database": "process.env.DATABASE",
-        "host": "process.env.HOST",
+        "username": "huuiqhmjjxygee",
+        "password": "53fd749beb1d6aa540f42a65b2ffca0d468e4107f1fbbe55f02b598272312f60",
+        "database": "d78eial7jjt34c",
+        "host": "ec2-46-137-156-205.eu-west-1.compute.amazonaws.com",
         "dialect": "postgres"
     }
 }
