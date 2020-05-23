@@ -1,0 +1,69 @@
+#banner,
+#content-box,
+#work-box,
+#sud-work-box,
+#sub-work-box2 {
+    background-color: whitesmoke;
+}
+
+#banner {
+    height: 3in;
+}
+
+#content-box {
+    height: 2in;
+}
+
+#work-box,
+#work-box2 {
+    height: 5in;
+}
+
+#sud-work-box {
+    height: 2.5in;
+}
+
+#sub-work-box2 {
+    height: 2.5in;
+}
+
+#advert-box {
+    height: 100vh;
+    background-color: rgb(45, 75, 45);
+}
+
+#advert-content-box {
+    color: white;
+    font-size: x-large;
+}
+
+#profilePix {
+    background-color: whitesmoke;
+}
+
+#pix {
+    border: solid thick white;
+    padding: 3mm;
+    background-color: white;
+    position: relative;
+    left: 3mm;
+}
+
+@media(min-width: 1224px) {
+    #advert-content-box {
+        position: relative;
+        top: 2.6in;
+        left: 2.6in;
+    }
+}
+
+@media(max-width: 320px) {
+    #advert-content-box {
+        position: absolute;
+        top: .6in;
+        left: 1.4cm;
+    }
+    #advert-box {
+        height: 3in;
+    }
+}

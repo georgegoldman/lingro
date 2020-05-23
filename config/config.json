@@ -1,0 +1,23 @@
+{
+    "development": {
+        "username": "postgres",
+        "password": "password",
+        "database": "cropbankdb",
+        "host": "localhost",
+        "dialect": "postgres"
+    },
+    "test": {
+        "username": "postgres",
+        "password": "password",
+        "database": "cropbankdb",
+        "host": "localhost",
+        "dialect": "postgres"
+    },
+    "production": {
+        "username": "process.env.USER",
+        "password": "process.env.PASSWORD",
+        "database": "process.env.DATABASE",
+        "host": "process.env.HOST",
+        "dialect": "postgres"
+    }
+}

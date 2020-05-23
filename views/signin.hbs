@@ -1,0 +1,41 @@
+<div class="col-xlg-6 col-lg-6 col-sm-12 col-12">
+    <div id="auth">
+        <div class="row">
+            <div class="col-md-2 col-12"></div>
+            <div class="col-xlg-12 col-md-9 col-sm-12 col-12">
+                <div id="signin">
+                    <form action="/signin" method="POST">
+                        <fieldset class="form-group">
+                            <legend class="form-group">login</legend>
+                            <div class="form-row">
+                                <div class="input-group col-12">
+                                    <input type="hidden" name="_csrf" value="{{csrfToken}}">
+                                </div>
+                                <div class="input-group col-12 col-md-4 mb-3">
+                                    <input type="text" name="email" placeholder="Email or Phone" id=""
+                                        class="form-control">
+                                </div>
+                                <div class="input col-md-4 col-12 mb-3">
+                                    <input type="password" name="password" placeholder="Password" id=""
+                                        class="form-control">
+                                </div>
+                                <div class="input-group col-md-2 col-12">
+                                    <button type="submit" class="btn btn-secondary form-control"><i class="fas fa-sign-in-alt"></i></button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-2 col-xlg-2 col-sm-2 col-12"></div>
+            <div class="col-md-9 col-xlg-8 col-sm-8 col-12 mt-xlg-5 mt-sm-8 mt-8 mt-lg-5">
+                <p><i class="fas fa-4x fa-question"></i></p>
+                <p>Dive in to see how,<br>you can make you crop and <br>save you money as food</p>
+                <p class="mt-lg-5 mt-xlg-5 mt-sm-5 mt-5">
+                    Signup with FoodFarm
+                </p>
+                <div class="mb-5">{{> signin_btn}}</div>
+            </div>
+        </div>
+    </div>
+</div>
