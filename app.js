@@ -1,10 +1,14 @@
 const express = require('express')
 const app = express();
+const server = require('http').createServer(app)
+const io = require('socket.io')(server)
 const upload = require('./uploadMiddleware')
 const Resize = require('./Resize')
 const path = require('path')
 const PORT = process.env.PORT || 5000
 const isProduction = process.env.NODE_ENV === 'production'
+
+
 
 const exphbs = require('express-handlebars')
 const cookieParser = require('cookie-parser')
@@ -19,16 +23,20 @@ const countryList = require('./country')
 const db = require('./models')
 const bcrypt = require('bcrypt');
 const salt = bcrypt.genSaltSync()
+    // const favicon = require('serve-favicon')
 
 app.engine('.hbs', exphbs({
     extname: '.hbs'
 }))
 app.set('view engine', '.hbs');
 app.use(express.static(__dirname + '/public'))
+app.use('/node_modules', express.static(__dirname + '/node_modules'));
 app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
+// app.use(favicon(__dirname + '/public/icon/favicon.ico'))
 
 app.use(express.urlencoded());
+app.use(express.json())
 app.use(cookieParser())
 app.use(session({
     key: 'user_sid',
@@ -107,7 +115,7 @@ app.route('/signin')
             where: {
                 email: email
             },
-            include: [db.ProfilePix, db.Farm],
+            include: [db.ProfilePix, db.Farm, db.ChatHistory],
         }).then(function(user) {
             if (!user) {
                 res.redirect('/signin');
@@ -115,7 +123,7 @@ app.route('/signin')
                 res.redirect('/signin')
             } else {
                 req.session.user = user.dataValues
-                console.info(user)
+                    // console.info(user)
                 res.redirect('/cropbank')
             }
         })
@@ -133,7 +141,7 @@ app.get('/cropbank', function(req, res) {
 app.route('/updateProfile')
     .get(csrfProtection, function(req, res) {
         if (req.session.user && req.cookies.user_sid) {
-            console.info(req.session.user)
+            // console.info(req.session.user)
             res.render('update_profile', {
                 layout: 'main',
                 csrfToken: req.csrfToken(),
@@ -148,7 +156,7 @@ app.route('/updateProfile')
             res.status(401).json({ error: 'please provide an image' })
         }
         const filename = await fileUpload.save(req.file.buffer)
-        console.log(req.session.user.ProfilePixes[0].id)
+            // console.log(req.session.user.ProfilePixes[0].id)
         db.ProfilePix.update({
                 pix: filename
             }, {
@@ -156,7 +164,7 @@ app.route('/updateProfile')
                 returning: true,
             })
             .then(req.session.user.ProfilePixes[0].pix = filename)
-        console.info(typeof(req.session.user.id))
+            // console.info(typeof(req.session.user.id))
         res.redirect('/updateProfile')
         res.status(401).json({ error: req.session.user.id })
     })
@@ -184,6 +192,56 @@ app.route('/farm')
             })
     })
 
+app.route('/chatRoom')
+    .get(csrfProtection, function(req, res) {
+        if (req.session.user && req.cookies.user_sid) {
+            db.ChatHistory.findAll({
+                    where: {
+                        UserId: req.session.user.id
+                    }
+                })
+                .then(function(chat) {
+                    if (chat) {
+                        let chatHistories = []
+                        try {
+                            for (i = 0; i <= chat.length; i++) {
+                                console.log(chat[i].dataValues.history)
+                            }
+                            res.render('chatrooms', {
+                                csrfToken: req.csrfToken(),
+                                user: req.session.user,
+                                chat: chat.dataValues,
+                            })
+                        } catch (TypeError) {
+                            res.render('chatrooms', {
+                                csrfToken: req.csrfToken(),
+                                user: req.session.user,
+                                chat: chat.dataValues,
+                            })
+                        }
+
+                    }
+                })
+
+        }
+    })
+    .post(function(req, res) {
+        // console.info(req.session.user.id)
+        db.ChatHistory.create({
+                name: req.body.name,
+                message: req.body.message,
+                UserId: req.session.user.id,
+            })
+            .then(function() {
+                io.emit('message', req.body)
+                res.redirect('/chatRoom')
+            })
+    })
+
+io.on('connection', (socket) => {
+    console.log('\n \n connection established \n \n ')
+})
+
 app.get('/logout', function(req, res) {
     if (req.session.user && req.cookies.user_sid) {
         res.clearCookie('user_sid');
@@ -196,12 +254,11 @@ app.use(function(req, res, next) {
     res.status(404).send("sorry can't find that!")
 })
 
-
 db.sequelize.sync({
         // force: true
     })
     .then(function() {
-        app.listen(PORT, function() {
-            console.log(`runnig server on port http://localhost:${PORT}/`)
+        server.listen(PORT, function() {
+
         });
     })
