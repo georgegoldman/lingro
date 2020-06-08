@@ -1,7 +1,7 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
     const ChatHistory = sequelize.define('ChatHistory', {
-        name: DataTypes.TEXT,
+        receiver: DataTypes.INTEGER,
         message: DataTypes.TEXT,
     }, {});
     ChatHistory.associate = function(models) {

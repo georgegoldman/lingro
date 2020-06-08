@@ -59,6 +59,9 @@
         top: 2.6in;
         left: 2.6in;
     }
+    #display_msg {
+        min-height: 1in;
+    }
 }
 
 @media(max-width: 320px) {

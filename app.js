@@ -22,6 +22,7 @@ const csrfProtection = csrf({
 const countryList = require('./country')
 const db = require('./models')
 const bcrypt = require('bcrypt');
+const { table } = require('console');
 const salt = bcrypt.genSaltSync()
     // const favicon = require('serve-favicon')
 
@@ -121,7 +122,7 @@ app.route('/signin')
                 res.redirect('/signin');
             } else if (user && bcrypt.compareSync(password, user.password)) {
                 req.session.user = user.dataValues
-                    // console.info(user)
+                console.info(user)
                 res.redirect('/cropbank')
             } else {
                 res.redirect('/signin');
@@ -240,7 +241,19 @@ app.route('/chatRoom')
     })
 
 io.on('connection', (socket) => {
-    console.log('\n \n connection established \n \n ')
+    socket.on('chat message', (msg) => {
+        io.emit('message', (msg))
+        console.log('message: ' + msg)
+    })
+})
+
+
+io.on('connection', (socket) => {
+    // io.emit('message', 'data base data apears here')
+    console.log('\n user connected \n ')
+    socket.on('disconnect', () => {
+        console.log(' \n user disconnected \n ')
+    })
 })
 
 app.get('/logout', function(req, res) {
@@ -254,6 +267,7 @@ app.get('/logout', function(req, res) {
 app.use(function(req, res, next) {
     res.status(404).send("sorry can't find that!")
 })
+
 
 db.sequelize.sync({
         // force: true

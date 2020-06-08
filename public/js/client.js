@@ -1,26 +1,12 @@
-var socket = io()
-
-$(() => {
-    $("#send").click(() => {
-        sendMessage({
-            name: $("#chatingwith").val(),
-            message: $("#message").val()
-        })
-        getMessages()
+$(function() {
+    var socket = io()
+    $('form').submit(function(e) {
+        e.preventDefault()
+        socket.emit('chat message', $('#message').val())
+        $('#message').val('')
+        return false
     })
-
-    function addMessages(message) {
-        `<h4>${message.name}</h4>
-         <p>${message.message}</p>`
-    }
-
-    function getMessages() {
-        $.get('http://localhost:5000/chatRoom', (data) => {
-            data.forEach(addMessages)
-        })
-    }
-
-    function sendMessage(message) {
-        $.post('http://localhost:5000/chatRoom', message)
-    }
+    socket.on('message', function(msg) {
+        $('#display_msg').append($('<p>').text(msg))
+    })
 })

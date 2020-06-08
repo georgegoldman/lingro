@@ -2,8 +2,6 @@
 
 module.exports = {
     up: (queryInterface, Sequelize) => {
-
-        // return Promise.all([queryInterface.dropAllTables()])
         /*
           Add altering commands here.
           Return a promise to correctly handle asynchronicity.
@@ -11,6 +9,7 @@ module.exports = {
           Example:
           return queryInterface.createTable('users', { id: Sequelize.INTEGER });
         */
+        return queryInterface.addColumn('ChatHistories', 'receiver', Sequelize.INTEGER)
     },
 
     down: (queryInterface, Sequelize) => {

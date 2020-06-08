@@ -12,35 +12,23 @@
     </div>
     <div class="col-md-3">
         <div class="row">
-            <div class="col-md-12"></div>
-            <div id="chatingwith">
-                {{user.name}}
-            </div>
-            <div class="col-md-12">
-                <div class="col-md-12">
-                    chat
-                </div>                
-                    {{#each chat}}
-                        <h4>{{chat}}</h4> 
-                    {{/each }}
-                <div class="col-md-12">
-                    
-                </div>
-                <form method="POST" action="/chatRoom">
-                    <fieldset>
-                        <div class="form-group row">
-                            <div class="col-md-12">
-                                <input type="hidden" name="_csrf" value="{{csrfToken}}">
-                            </div>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" id="message" name="message" placeholder="enter message">
-                            </div>
-                            <div class="col-md-3">
-                                <input type="submit" value="send" id="send" class="btn btn-primary" onclick="refreshPage()">
-                            </div>
+           
+            <div class="col-md-12 card">
+                <div class="card-body">
+                    <h5 class="card-title">{{user.name}}</h5>
+                    <p class="card-text" id="display_msg">
+                    </p>
+                    <form action="" method="POST">
+                        <div class="form-row">
+                                <div class="form-group col-md-10">
+                                <input type="text" placeholder="enter message" id="message" class="form-control ">
+                                </div>
+                                <div class="input-group col-md-2">
+                                    <input type="submit" value="send" class="btn btn-primary ">
+                                </div>
                         </div>
-                    </fieldset>
-                </form>
+                    </form>
+                </div>                
             </div>
         </div>
     </div>
