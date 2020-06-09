@@ -61,6 +61,7 @@
     }
     #display_msg {
         min-height: 1in;
+        max-height: 3in;
     }
 }
 
