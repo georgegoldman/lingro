@@ -112,13 +112,13 @@ app.route('/signin')
 
         var email = req.body.email,
             password = req.body.password;
-        db.User.findOne({
-            where: {
-                email: email
-            },
-            include: [db.ProfilePix, db.Farm, db.ChatHistory],
-        }).then(function(user) {
-            try {
+        try {
+            db.User.findOne({
+                where: {
+                    email: email
+                },
+                include: [db.ProfilePix, db.Farm, db.ChatHistory],
+            }).then(function(user) {
                 if (!user) {
                     res.redirect('/signin');
                 } else if (user && bcrypt.compareSync(password, user.password)) {
@@ -129,11 +129,11 @@ app.route('/signin')
                     res.redirect('/signin');
 
                 }
-            } catch (SequelizeDatabaseError) {
-                res.redirect('/signin');
+            })
+        } catch (SequelizeDatabaseError) {
+            res.redirect('/signin');
 
-            }
-        })
+        }
     })
 app.get('/cropbank', function(req, res) {
     if (req.session.user && req.cookies.user_sid) {
