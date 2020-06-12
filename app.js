@@ -203,47 +203,45 @@ app.route('/chatRoom')
                     }
                 })
                 .then(function(chat) {
-                    if (chat) {
-                        let chatHistories = []
-                        try {
-                            for (i = 0; i <= chat.length; i++) {
-                                console.log(chat[i].dataValues.history)
-                            }
-                            res.render('chatrooms', {
-                                csrfToken: req.csrfToken(),
-                                user: req.session.user,
-                                chat: chat.dataValues,
-                            })
-                        } catch (TypeError) {
-                            res.render('chatrooms', {
-                                csrfToken: req.csrfToken(),
-                                user: req.session.user,
-                                chat: chat.dataValues,
-                            })
+                    const msgList = []
+                    try {
+
+                        for (i = 0; i <= chat.length; i++) {
+                            console.log(chat[i].message)
+                            msgList.push(chat[i].message)
                         }
 
+                    } catch (TypeError) {
+                        console.error('error fixed')
                     }
+                    console.log(msgList)
+                    console.log(chat.length)
+                        // res.send(chat)
+                    res.render('chatrooms', {
+                        csrfToken: req.csrfToken(),
+                        user: req.session.user,
+                        chat: msgList,
+                    })
                 })
 
         }
     })
-    .post(function(req, res) {
-        // console.info(req.session.user.id)
-        db.ChatHistory.create({
-                name: req.body.name,
-                message: req.body.message,
-                UserId: req.session.user.id,
-            })
-            .then(function() {
-                io.emit('message', req.body)
-                res.redirect('/chatRoom')
-            })
-    })
 
 io.on('connection', (socket) => {
-    socket.on('chat message', (msg) => {
-        io.emit('message', (msg))
-        console.log('message: ' + msg)
+    socket.on('chat message', (data) => {
+        if (data.msg == '') {
+            console.log('no message sent')
+            io.emit('message', (data.msg))
+        } else {
+            db.ChatHistory.create({
+                message: data.msg,
+                receiver: data.receiver,
+                UserId: data.sender
+            }).then(function() {
+                io.emit('message', (data))
+                console.log('message: ' + data.msg)
+            })
+        }
     })
 })
 

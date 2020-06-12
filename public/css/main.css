@@ -61,12 +61,13 @@
     }
     #msgBox {
         overflow: scroll;
-        min-height: 4in !important;
+        min-height: 4.15in !important;
         max-height: 3.3in !important;
     }
     #msgBox::-webkit-scrollbar {
         width: 7px;
         height: 2px;
+        display: none;
     }
     #msgBox::-webkit-scrollbar-track {
         -webkit-transition: ease-in-out;
