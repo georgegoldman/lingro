@@ -199,7 +199,8 @@ app.route('/chatRoom')
         if (req.session.user && req.cookies.user_sid) {
             db.ChatHistory.findAll({
                     where: {
-                        UserId: req.session.user.id
+                        UserId: req.session.user.id,
+                        receiver: 2,
                     }
                 })
                 .then(function(chat) {

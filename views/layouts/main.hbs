@@ -9,12 +9,12 @@
 </head>
 
 <body>
-    <nav class="navbar fixed-top navbar-expand-lg navbar-light" id="nav-bar">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light lg-view" >
                 
                         <div class="col-md-4">
                             <div class="row">
                                 <a class="navbar-brand" href="/cropbank"><img src="/img/logo/trie.png" height="37px" width="37" alt=""></a>
-                                <a class="nav-item nav-link active" href="/cropbank"><i class="fas fa-poll "></i></a>
+                                <a class="nav-item nav-link active" href="/cropbank"><i class="fas fa-house-user "></i></a>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -30,7 +30,8 @@
 
                             </div>
                         </div>
-            </nav>     
+            </nav>
+             
     <div class="col-md-12 mt-md-5">
         <div class="row">
         <div class="col-md-12 mt-md-4">
@@ -39,6 +40,11 @@
         </div>
     </div>
     </div>
+    <nav class="navbar fixed-bottom navbar-light" id="sm-view">
+        <a class="nav-item nav-link active " href="/cropbank"><i class="fas fa-house-user "></i></a>
+        <a class="nav-item nav-link" href="#"><i class="far fa-bell"></i></a>
+        <a class="nav-item nav-link" href="/updateProfile"><img class="rounded-circle" src="/img/{{user.ProfilePixes.0.pix}}" height="23px" width="23px" alt=""></a>
+    </nav>
 </body>
 <script src="/js/script.js"></script>
 <script src="/js/bootstrap.min.js"></script>

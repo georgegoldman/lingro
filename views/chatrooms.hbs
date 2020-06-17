@@ -14,10 +14,10 @@
         <div class="row">
            
             
-            <div class="col-md-12 card">
+            <div class="col-md-12 card " id="lg-view">
                 <div class="card-body" >
                     <h5 class="card-title" >{{user.name}}</h5>
-                    <div id="msgBox"> 
+                    <div id="msgBox" class="mb-5 pb-5"> 
                         {{#each chat}}
                             <p id="savedMsg">{{this}}</p>
                         {{/each}}
@@ -25,24 +25,54 @@
                         </div>
                 
                     <form action="" method="POST">
-                        <div class="form-row">
+                        <div class="row ">
                                 <div class="form-group col-md-10">
                                     <input type="hidden" id="sender" value="{{user.id}}"  class="form-control ">
                                 </div>
                                 <div class="form-group col-md-10">
                                     <input type="hidden" id="reciver" value='2'  class="form-control ">
                                 </div>
-                                <div class="form-group col-md-10">
-                                    <input type="text" placeholder="Send message" id="message" class="form-control ">
+                                <div class="form-group col-md-10 col-10">
+                                    <input type="text" placeholder="Send message" id="message" class="form-control">
                                 </div>
-                                <div class="input-group col-md-2 mb-md-3">
+                                <div class="form-group col-md-2 col-2">
                                 <button type="submit" class="btn "><i class="fas fa-reply-all"></i></button>
                                 </div>
                         </div>
                     </form>
+                    
                 </div>                
             </div>
             
+            <div class="col-md-12 card " id="sm-view">
+                <div class="card-body" >
+                    <h5 class="card-title" >{{user.name}}</h5>
+                    <div id="msgBox" class="mb-5 pb-5"> 
+                        {{#each chat}}
+                            <p id="savedMsg">{{this}}</p>
+                        {{/each}}
+                        <p class="card-text" id="display_msg"></p>
+                        </div>
+                
+                    <form action="" method="POST">
+                        <div class="row ">
+                                <div class="form-group col-md-10">
+                                    <input type="hidden" id="sender" value="{{user.id}}"  class="form-control ">
+                                </div>
+                                <div class="form-group col-md-10">
+                                    <input type="hidden" id="reciver" value='2'  class="form-control ">
+                                </div>
+                                <div class="form-group col-md-10 col-10">
+                                    <input type="text" placeholder="Send message" id="message" class="form-control">
+                                </div>
+                                <div class="form-group col-md-2 col-2">
+                                <button type="submit" class="btn "><i class="fas fa-reply-all"></i></button>
+                                </div>
+                        </div>
+                    </form>
+                    
+                </div>                
+            </div>
         </div>
     </div>
 </div>
