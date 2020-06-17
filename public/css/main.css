@@ -31,13 +31,7 @@
     height: 2.5in;
 }
 
-#advert-box {
-    height: 100vh;
-    background-color: chocolate;
-}
-
 #advert-content-box {
-    color: white;
     font-size: x-large;
 }
 
@@ -63,9 +57,12 @@
 
 @media(min-width: 1224px) {
     #advert-content-box {
-        position: relative;
+        /* position: relative;
         top: 2.6in;
-        left: 2.6in;
+        left: 2.6in; */
+    }
+    #advert-box {
+        height: 100vh;
     }
     #msgBox {
         overflow: scroll;
@@ -103,6 +100,9 @@
     }
     #sm-view {
         display: block;
+    }
+    #advert-box {
+        height: 3in;
     }
     #nav-bar-sm-device {
         background-color: white;

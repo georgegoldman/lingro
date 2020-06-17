@@ -2,16 +2,16 @@
     <div id="auth">
         <div class="row">
             <div class="col-md-2 col-12"></div>
-            <div class="col-xlg-12 col-md-9 col-sm-12 col-12">
+            <div class="col-lg-9 col-md-12 col-sm-12 col-12">
                 <div id="signin">
                     <form action="/signin" method="POST">
                         <fieldset class="form-group">
                             <legend class="form-group">login</legend>
                             <div class="form-row">
-                                <div class="input-group col-12">
+                                <div class="input-group col-lg-12 col-12">
                                     <input type="hidden" name="_csrf" value="{{csrfToken}}">
                                 </div>
-                                <div class="input-group col-12 col-lg-4 mb-3">
+                                <div class="input-group col-lg-6 col-12  mb-3">
                                     <input type="text" name="email" placeholder="Email or Phone" id=""
                                         class="form-control col-12">
                                 </div>
@@ -27,14 +27,30 @@
                     </form>
                 </div>
             </div>
-            <div class="col-md-2 col-xlg-2 col-sm-2 col-12"></div>
-            <div class="col-md-9 col-xlg-8 col-sm-8 col-12 mt-xlg-5 mt-sm-8 mt-8 mt-lg-5">
-                <p><img src="/img/logo/trie.png" height="97" alt=""></p>
-                <p>Dive in to see how,<br>you can make you crop and <br>save you money as food</p>
-                <p class="mt-lg-5 mt-xlg-5 mt-sm-5 mt-5">
-                    Signup with FoodFarm
-                </p>
-                <div class="mb-5">{{> signin_btn}}</div>
+            <div class="col-md-2 col-lg-1 col-xlg-2 col-sm-2 col-12"></div>
+            <div class="col-lg-12 col-xlg-8 col-md-12 col-sm-9 col-12 mt-xlg-5 mt-sm-3 mt-3 mt-lg-3">
+                <div class="row">
+                    <div class="col-lg-2 col-12 col-sm-12"></div>
+                    <div class="col-md-12 col-lg-10 col-12 col-sm-12">
+                        <p class="text-left"><img src="/img/logo/trie.png" height="97" alt=""></p>
+                        <p class="text-left">Dive in to see how,<br>you can make you crop and <br>save you money as food</p>
+                        <p class="text-left mt-lg-5 mt-xlg-5 mt-sm-5 mt-5">
+                            Signup with FoodFarm
+                        </p>
+                    </div>
+
+                    <div class="col-md-1"></div>
+                    <div class="col-md-1"></div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                       <div class="row">
+                            <div class="col-lg-1 col-md-1 col-sm-1"></div>
+                            <div class="col-lg-1 col-md-1 col-sm-1"></div>
+                            <div class="mb-5 col-12 col-lg-9 col-md-12 col-sm-11">
+                                {{> signin_btn}}
+                            </div>
+                       </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
