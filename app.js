@@ -228,6 +228,15 @@ app.route('/chatRoom')
         }
     })
 
+app.get('/settings', function(req, res) {
+    if (req.session.user && req.cookies.user_sid) {
+        res.render('settings', {
+            layout: 'main',
+            user: req.session.user
+        })
+    }
+})
+
 io.on('connection', (socket) => {
     socket.on('chat message', (data) => {
         if (data.msg == '') {

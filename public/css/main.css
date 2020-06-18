@@ -39,6 +39,19 @@
     background-color: whitesmoke;
 }
 
+#farm-box-description {
+    /* overflow-y: scroll !important; */
+    max-height: 1in;
+}
+
+#farm-box-description::-webkit-scrollbar {
+    width: 7px !important;
+}
+
+.div-scroll {
+    overflow-y: scroll;
+}
+
 #pix {
     border: solid thick white;
     padding: 3mm;
@@ -56,6 +69,18 @@
 }
 
 @media(min-width: 1224px) {
+    #farm-box-description {
+        max-height: 7rem;
+    }
+    #farm-display {
+        max-height: 2in;
+    }
+    #news-box {
+        display: block;
+        position: fixed;
+        top: 10%;
+        left: 67%;
+    }
     #advert-content-box {
         /* position: relative;
         top: 2.6in;
@@ -95,6 +120,9 @@
 }
 
 @media(max-width: 480px) {
+    #news-box {
+        display: none;
+    }
     #lg-view {
         display: none;
     }
