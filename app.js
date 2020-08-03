@@ -93,6 +93,7 @@ app.route('/signup')
             }
         }).then(function(user) {
             if (user) {
+                // res.send('seen')
                 res.redirect('/signin');
             }
             if (!user) {
@@ -122,7 +123,7 @@ app.route('/signup')
                         } else {
                             next()
                         }
-                        res.redirect('/')
+                        res.redirect('/signin')
                     })
             }
         })
@@ -134,7 +135,6 @@ app.route('/signin')
         res.render('signin', {
             layout: null,
             csrfToken: req.csrfToken(),
-            data: req.query.noAccount
         })
     })
     .post(function(req, res) {
@@ -148,13 +148,18 @@ app.route('/signin')
             include: [db.ProfilePix, db.Farm, db.ChatHistory],
         }).then(function(user) {
             if (user == null) {
-                res.redirect('/signin?noAccount=' + true);
+                // res.redirect('/signin');
+                res.send({
+                    success: true
+                })
             } else if (user && bcrypt.compareSync(password, user.password)) {
                 req.session.user = user.dataValues
                 // console.info(user)
                 res.redirect('/lingro')
             } else {
-                res.redirect('/signin?noAccount=' + true);
+                res.send({
+                    success: true
+                })
 
             }
         })

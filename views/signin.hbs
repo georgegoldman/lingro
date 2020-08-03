@@ -14,7 +14,7 @@
                 </div>
                 <div class="col-lg-4 col-12">
                     <div id="signUpPush"></div>
-                    <form action="/signin" method="POST">
+                    <form  class="signInForm" >
                         <fieldset class="form-group">
                             <legend class="form-group">signin</legend>
                             <div class="form-row">
@@ -22,11 +22,11 @@
                                     <input type="hidden" name="_csrf" value="{{csrfToken}}">
                                 </div>
                                 <div class="input-group col-lg-6 col-12  mb-3">
-                                    <input type="text" name="email" placeholder="Email" id=""
+                                    <input type="text" name="email" placeholder="Email" id="signinEmail"
                                         class="form-control col-12" required>
                                 </div>
                                 <div class="input col-lg-4 col-12 mb-3">
-                                    <input type="password" name="password" placeholder="Password" id=""
+                                    <input type="password" name="password" placeholder="Password" id="signinPass"
                                         class="form-control" required>
                                 </div>
                                 <div class="input-group col-lg-2 col-12">
@@ -42,3 +42,5 @@
         </div>
     </div>
 </body>
+
+{{> scripts}}

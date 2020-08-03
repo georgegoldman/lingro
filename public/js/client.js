@@ -37,3 +37,26 @@ $('#message').ready(function() {
     const onRealodLast = document.getElementById('msgBox').lastElementChild;
     onRealodLast.scrollIntoView()
 })
+
+$(document).ready(function() {
+    $('.signInForm').on('submit', function(evt) {
+        evt.preventDefault();
+        console.log('hi')
+        let email = $('#signinEmail')
+        let password = $('#signinPass')
+        $.ajax({
+            url: '/signin',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                email: email.val(),
+                password: password.val()
+            }),
+            success: function(response) {
+                if (response.success) {
+                    alert('wrong log info')
+                }
+            }
+        })
+    })
+})
