@@ -1,6 +1,6 @@
 $(function() {
     var socket = io()
-    $('form').submit(function(e) {
+    $('#chat').submit(function(e) {
         e.preventDefault()
         socket.emit('chat message', {
             msg: $('#message').val(),
@@ -21,6 +21,14 @@ $(function() {
             const last = document.querySelector('#display_msg').lastElementChild;
             last.scrollIntoView()
         }
+    })
+    socket.on('like', function(data) {
+        data.like.forEach(function(e) {
+            console.log(e)
+            if (document.querySelector('.like').id == `${e.LingId}` && data.user.id == e.UserId) {
+                $('.like').addClass('text-danger')
+            }
+        })
     })
 })
 

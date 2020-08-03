@@ -7,13 +7,14 @@ const Resize = require('./Resize')
 const path = require('path')
 const PORT = process.env.PORT || 5000
 const isProduction = process.env.NODE_ENV === 'production'
+const bodyParser = require('body-parser')
 
 
 
 const exphbs = require('express-handlebars')
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
-    // const morgan = require('morgan')
+// const morgan = require('morgan')
 const csrf = require('csurf')
 const csrfProtection = csrf({
     cookie: true
@@ -22,9 +23,14 @@ const csrfProtection = csrf({
 const countryList = require('./country')
 const db = require('./models')
 const bcrypt = require('bcrypt');
-const { table } = require('console');
+const {
+    privateEncrypt
+} = require('crypto');
+const {
+    title
+} = require('process');
 const salt = bcrypt.genSaltSync()
-    // const favicon = require('serve-favicon')
+// const favicon = require('serve-favicon')
 
 app.engine('.hbs', exphbs({
     extname: '.hbs'
@@ -36,7 +42,10 @@ app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
 // app.use(favicon(__dirname + '/public/icon/favicon.ico'))
 
-app.use(express.urlencoded());
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
+app.use(bodyParser.json())
 app.use(express.json())
 app.use(cookieParser())
 app.use(session({
@@ -57,18 +66,21 @@ app.use(function(req, res, next) {
 
 var sessionChecker = function(req, res, next) {
     if (req.session.user && req.cookies.user_sid) {
-        res.redirect('/cropbank');
+        res.redirect('/ling');
     } else {
         next()
     }
 }
 app.get('/', csrfProtection, sessionChecker, function(req, res) {
-    res.redirect('/signin');
+    res.render('startup', {
+        layout: null,
+
+    });
 })
 app.route('/signup')
     .get(sessionChecker, csrfProtection, function(req, res) {
         res.render('signup', {
-            layout: 'home',
+            layout: null,
             csrfToken: req.csrfToken(),
             countryList: countryList,
         })
@@ -96,6 +108,19 @@ app.route('/signup')
                             pix: 'default.png',
                             UserId: user.dataValues.id
                         })
+                        if (req.body.acountType == 'Farmer') {
+                            db.UserType.create({
+                                farmer: true,
+                                UserId: user.dataValues.id
+                            })
+                        } else if (req.body.acountType == 'Agro company') {
+                            db.UserType.create({
+                                agroCompany: true,
+                                UserId: user.dataValues.id
+                            })
+                        } else {
+                            next()
+                        }
                         res.redirect('/')
                     })
             }
@@ -103,10 +128,11 @@ app.route('/signup')
     })
 app.route('/signin')
     .get(csrfProtection, function(req, res) {
-        res.render('signin', {
-            layout: 'home',
-            csrfToken: req.csrfToken()
-        })
+        res.send('app in progress')
+        // res.render('signin', {
+        //     layout: null,
+        //     csrfToken: req.csrfToken()
+        // })
     })
     .post(function(req, res) {
 
@@ -122,20 +148,39 @@ app.route('/signin')
                 res.redirect('/signin');
             } else if (user && bcrypt.compareSync(password, user.password)) {
                 req.session.user = user.dataValues
-                    // console.info(user)
-                res.redirect('/cropbank')
+                // console.info(user)
+                res.redirect('/lingro')
             } else {
                 res.redirect('/signin');
 
             }
         })
     })
-app.get('/cropbank', function(req, res) {
+app.get('/lingro', function(req, res) {
     if (req.session.user && req.cookies.user_sid) {
-        res.render('cropbank', {
-            layout: 'main',
-            user: req.session.user
-        })
+        db.Ling.findAll({
+                attributes: {},
+                include: [db.User, db.UpVote]
+            })
+            .then(function(lings) {
+                let lingList = new Array()
+                try {
+                    for (i = 0; i <= lings.length; i++) {
+                        // console.log()
+                        lingList.unshift(lings[i].dataValues)
+                    }
+                } catch (TypeError) {
+                    console.error('TypeError error fixed')
+
+                }
+                // console.log(lings[2].dataValues.UpVotes)
+                res.render('lingro', {
+                    layout: 'main',
+                    user: req.session.user,
+                    ling: lingList,
+                })
+            })
+
     } else {
         res.redirect('/signin')
     }
@@ -155,21 +200,81 @@ app.route('/updateProfile')
         const imagePath = path.join(__dirname, '/public/img')
         const fileUpload = new Resize(imagePath)
         if (!req.file) {
-            res.status(401).json({ error: 'please provide an image' })
+            res.status(401).json({
+                error: 'please provide an image'
+            })
         }
         const filename = await fileUpload.save(req.file.buffer)
-            // console.log(req.session.user.ProfilePixes[0].id)
+        // console.log(req.session.user.ProfilePixes[0].id)
         db.ProfilePix.update({
                 pix: filename
             }, {
-                where: { UserId: req.session.user.id },
+                where: {
+                    UserId: req.session.user.id
+                },
                 returning: true,
             })
             .then(req.session.user.ProfilePixes[0].pix = filename)
-            // console.info(typeof(req.session.user.id))
+        // console.info(typeof(req.session.user.id))
         res.redirect('/updateProfile')
-        res.status(401).json({ error: req.session.user.id })
+        res.status(401).json({
+            error: req.session.user.id
+        })
     })
+
+app.get('/upvote', (req, res) => {
+    if (req.session.user && req.cookies.user_sid) {
+        db.UpVote.findOne({
+            where: {
+                UserId: req.session.user.id,
+                LingId: req.query.lingId
+            }
+        }).then((upVote) => {
+            if (upVote) {
+                db.UpVote.destroy({
+                        where: {
+                            id: upVote.dataValues.id
+                        }
+                    })
+                    .then(() => {
+                        db.Ling.findByPk(parseInt(req.query.lingId, 10)).then(ling => {
+                            let lingUpVote = ling.dataValues.upVote
+                            const incrmnt = lingUpVote - 1
+                            ling.update({
+                                upVote: incrmnt
+                            })
+                        }).then(
+                            res.redirect('/lingro')
+                        )
+                    })
+
+            } else if (!upVote) {
+                db.Ling.findByPk(parseInt(req.query.lingId, 10)).then(ling => {
+                    let lingUpVote = ling.dataValues.upVote
+                    const incrmnt = lingUpVote + 1
+                    ling.update({
+                            upVote: incrmnt
+                        })
+                        .then(ling => {
+                            db.UpVote.create({
+                                    type: true,
+                                    LingId: ling.dataValues.id,
+                                    UserId: req.session.user.id,
+                                })
+                                .then(() => {
+                                    res.redirect('/lingro')
+                                })
+                        })
+                })
+
+            }
+        })
+
+
+    }
+
+})
+
 
 app.route('/farm')
     .get(csrfProtection, function(req, res) {
@@ -217,7 +322,7 @@ app.route('/chatRoom')
                     }
                     console.log(msgList)
                     console.log(chat.length)
-                        // res.send(chat)
+                    // res.send(chat)
                     res.render('chatrooms', {
                         csrfToken: req.csrfToken(),
                         user: req.session.user,
@@ -225,6 +330,46 @@ app.route('/chatRoom')
                     })
                 })
 
+        }
+    })
+app.route('/ling')
+    .get(csrfProtection, function(req, res) {
+        if (req.session.user && req.cookies.user_sid) {
+            res.render('ling', {
+                layout: 'main',
+                csrfToken: req.csrfToken(),
+                user: req.session.user
+            })
+        } else {
+            res.redirect('/signin')
+        }
+    })
+    .post(function(req, res) {
+        db.Ling.create({
+            content: req.body.lings,
+            UserId: req.session.user.id
+        }).then(function() {
+            res.redirect('/lingro')
+        })
+    })
+// app.get('/testFetch', function(req, res) {
+//     db.UpVote.findAll({
+//             attributes: {}
+//         })
+//         .then(likes => {
+//             res.json({
+//                 like: likes,
+//                 user: req.session.user
+//             })
+//         })
+
+// })
+app.route('/trends')
+    .get(function(req, res) {
+        if (req.session.user && req.cookies.user_sid) {
+            res.render('trends', {
+                layout: 'main'
+            })
         }
     })
 
@@ -253,15 +398,22 @@ io.on('connection', (socket) => {
             })
         }
     })
+    db.UpVote.findAll({
+            attributes: {}
+        })
+        .then(like => {
+            io.emit('like', (like))
+            // console.log(like)
+        })
 })
 
 
 io.on('connection', (socket) => {
     // io.emit('message', 'data base data apears here')
-    console.log('\n user connected \n ')
-    socket.on('disconnect', () => {
-        console.log(' \n user disconnected \n ')
-    })
+    // console.log('\n user connected \n ')
+    // socket.on('disconnect', () => {
+    //     console.log(' \n user disconnected \n ')
+    // })
 })
 
 app.get('/logout', function(req, res) {
@@ -278,7 +430,7 @@ app.use(function(req, res, next) {
 
 
 db.sequelize.sync({
-        // force: true
+        force: true
     })
     .then(function() {
         server.listen(PORT, function() {

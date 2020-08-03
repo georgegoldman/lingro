@@ -1,0 +1,1 @@
+ build/web/icons/Icon-512.png build/web/icons/Icon-192.png build/web/favicon.png build/web/index.html build/web/manifest.json:  /home/lb/Documents/lingro/web/icons/Icon-512.png /home/lb/Documents/lingro/web/icons/Icon-192.png /home/lb/Documents/lingro/web/favicon.png /home/lb/Documents/lingro/web/index.html /home/lb/Documents/lingro/web/manifest.json

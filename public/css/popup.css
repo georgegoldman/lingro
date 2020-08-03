@@ -2,6 +2,7 @@
     body {
         font-family: Arial, Helvetica, sans-serif;
     }
+
     /* The Modal (background) */
     .modal {
         display: none;
@@ -14,7 +15,7 @@
         /* Location of the box */
         left: 46.3%;
         top: 11%;
-        width: 100;
+        width: 100%;
         /* Full width */
         height: 100%;
         /* Full height */
@@ -25,14 +26,16 @@
         background-color: transparent;
         /* Black w/ opacity */
     }
+
     /* Modal Content */
     .modal-content {
         background-color: #fefefe;
         margin: auto;
         padding: 20px;
         border: 1px solid whitesmoke;
-        width: 1in;
+        width: 1px;
     }
+
     /* The Close Button */
     .close {
         color: #aaaaaa;
@@ -40,6 +43,7 @@
         font-size: 20px;
         font-weight: bold;
     }
+
     .close:hover,
     .close:focus {
         color: #000;

@@ -6,6 +6,24 @@
     background-color: whitesmoke;
 }
 
+#signup {
+    height: 100%;
+}
+
+#startupBaseBox {
+    height: 100%;
+    font-family: 'Gloria Hallelujah', cursive;
+}
+
+div#authBox>div>div>p {
+    word-spacing: 3em;
+}
+
+div#authBox {
+    font-family: 'Kanit', sans-serif;
+
+}
+
 #nav-bar-big-device {
     background-color: white;
 }
@@ -69,80 +87,141 @@
 }
 
 @media(min-width: 1224px) {
+
+    #descriptionPush {
+        height: 50%;
+    }
+
+    #signUpPush {
+        height: 27%;
+    }
+
+    #ling {
+        max-height: 2.7cm;
+    }
+
+    #startup {
+        background-position: center;
+    }
+
+    #ling-content {
+        max-height: 65px;
+        overflow: scroll;
+    }
+
+    #ling::-webkit-scrollbar {
+        visibility: hidden;
+    }
+
     #farm-box-description {
         max-height: 7rem;
     }
+
     #farm-display {
         max-height: 2in;
     }
+
     #news-box {
         display: block;
         position: fixed;
         top: 10%;
         left: 67%;
     }
+
     #advert-content-box {
         /* position: relative;
         top: 2.6in;
         left: 2.6in; */
     }
+
     #advert-box {
         height: 100vh;
     }
+
     #msgBox {
         overflow: scroll;
         min-height: 4.15in !important;
         max-height: 3.3in !important;
     }
-    #msgBox::-webkit-scrollbar {
+
+    #msgBox::-webkit-scrollbar,
+    #ling-content::-webkit-scrollbar {
         width: 7px;
         height: 2px;
         display: none;
     }
+
     #msgBox::-webkit-scrollbar-track {
         -webkit-transition: ease-in-out;
         -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
         border-radius: 3px;
     }
+
     #msgBox::-webkit-scrollbar-thumb {
         border-radius: 3px;
         -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
     }
+
     #pix {
         height: 200;
     }
+
     #lg-view {
         display: block;
     }
+
     #sm-view {
         display: none;
     }
 }
 
 @media(max-width: 480px) {
+
+    #authPush {
+        height: 40vh;
+    }
+
+    div#imgeHolder>img {
+        height: 100%;
+    }
+
+    div#imgeHolder {
+        height: 30vh;
+        font-size: large;
+    }
+
+    div#authBox {}
+
     #news-box {
         display: none;
     }
+
     #lg-view {
         display: none;
     }
+
     #sm-view {
         display: block;
     }
+
     #advert-box {
         height: 3in;
     }
+
     #nav-bar-sm-device {
         background-color: white;
     }
+
     #advert-content-box {
         position: absolute;
         top: .6in;
         left: 1.4cm;
     }
+
     #advert-box {
         height: 3in;
     }
+
     #pix {
         height: 10px;
         width: 10px;
