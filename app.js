@@ -79,6 +79,7 @@ app.get('/', csrfProtection, sessionChecker, function(req, res) {
 })
 app.route('/signup')
     .get(sessionChecker, csrfProtection, function(req, res) {
+        console.log(req.query.accountsDontExist)
         res.render('signup', {
             layout: null,
             csrfToken: req.csrfToken(),
@@ -129,9 +130,11 @@ app.route('/signup')
 app.route('/signin')
     .get(csrfProtection, function(req, res) {
         // res.send('app in progress')
+        console.log()
         res.render('signin', {
             layout: null,
-            csrfToken: req.csrfToken()
+            csrfToken: req.csrfToken(),
+            data: req.query.noAccount
         })
     })
     .post(function(req, res) {
@@ -144,14 +147,14 @@ app.route('/signin')
             },
             include: [db.ProfilePix, db.Farm, db.ChatHistory],
         }).then(function(user) {
-            if (!user) {
-                res.redirect('/signin');
+            if (user == null) {
+                res.redirect('/signin?noAccount=' + true);
             } else if (user && bcrypt.compareSync(password, user.password)) {
                 req.session.user = user.dataValues
                 // console.info(user)
                 res.redirect('/lingro')
             } else {
-                res.redirect('/signin');
+                res.redirect('/signin?noAccount=' + true);
 
             }
         })
