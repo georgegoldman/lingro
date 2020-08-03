@@ -128,11 +128,11 @@ app.route('/signup')
     })
 app.route('/signin')
     .get(csrfProtection, function(req, res) {
-        res.send('app in progress')
-        // res.render('signin', {
-        //     layout: null,
-        //     csrfToken: req.csrfToken()
-        // })
+        // res.send('app in progress')
+        res.render('signin', {
+            layout: null,
+            csrfToken: req.csrfToken()
+        })
     })
     .post(function(req, res) {
 

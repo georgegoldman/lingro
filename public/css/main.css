@@ -6,13 +6,21 @@
     background-color: whitesmoke;
 }
 
+body {
+    font-family: 'Kanit', sans-serif !important;
+}
+
+legend {
+    font-family: 'Gloria Hallelujah', cursive !important;
+}
+
 #signup {
     height: 100%;
 }
 
 #startupBaseBox {
     height: 100%;
-    font-family: 'Gloria Hallelujah', cursive;
+    font-family: 'Gloria Hallelujah', cursive !important;
 }
 
 div#authBox>div>div>p {
