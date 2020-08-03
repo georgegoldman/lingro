@@ -178,7 +178,7 @@ div#authBox {
 @media(max-width: 480px) {
 
     #authPush {
-        height: 40vh;
+        height: 33vh;
     }
 
     div#imgeHolder>img {
