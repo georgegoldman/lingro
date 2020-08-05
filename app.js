@@ -84,6 +84,7 @@ app.route('/signup')
             layout: null,
             csrfToken: req.csrfToken(),
             countryList: countryList,
+            accountExist: req.query.accountExist
         })
     })
     .post(function(req, res) {
@@ -94,7 +95,7 @@ app.route('/signup')
         }).then(function(user) {
             if (user) {
                 // res.send('seen')
-                res.redirect('/signin');
+                res.redirect('/signup?accountExist=haveAccount');
             }
             if (!user) {
                 db.User.create({
@@ -135,6 +136,7 @@ app.route('/signin')
         res.render('signin', {
             layout: null,
             csrfToken: req.csrfToken(),
+            accountExist: req.query.noAccount
         })
     })
     .post(function(req, res) {
@@ -147,47 +149,25 @@ app.route('/signin')
             },
             include: [db.ProfilePix, db.Farm, db.ChatHistory],
         }).then(function(user) {
-            if (user == null) {
+            if (!user) {
                 // res.redirect('/signin');
-                res.send({
-                    success: true
-                })
+                res.redirect('/signin?noAccount=haveNoAccount')
             } else if (user && bcrypt.compareSync(password, user.password)) {
                 req.session.user = user.dataValues
                 // console.info(user)
                 res.redirect('/lingro')
             } else {
-                res.send({
-                    success: true
-                })
+                res.redirect('/signin?noAccount=haveNoAccount')
 
             }
         })
     })
 app.get('/lingro', function(req, res) {
     if (req.session.user && req.cookies.user_sid) {
-        db.Ling.findAll({
-                attributes: {},
-                include: [db.User, db.UpVote]
-            })
-            .then(function(lings) {
-                let lingList = new Array()
-                try {
-                    for (i = 0; i <= lings.length; i++) {
-                        // console.log()
-                        lingList.unshift(lings[i].dataValues)
-                    }
-                } catch (TypeError) {
-                    console.error('TypeError error fixed')
-
-                }
-                // console.log(lings[2].dataValues.UpVotes)
-                res.render('lingro', {
-                    layout: 'main',
-                    user: req.session.user,
-                    ling: lingList,
-                })
-            })
+        res.render('lingro', {
+            layout: 'main',
+            user: req.session.user,
+        })
 
     } else {
         res.redirect('/signin')
@@ -230,58 +210,6 @@ app.route('/updateProfile')
         })
     })
 
-app.get('/upvote', (req, res) => {
-    if (req.session.user && req.cookies.user_sid) {
-        db.UpVote.findOne({
-            where: {
-                UserId: req.session.user.id,
-                LingId: req.query.lingId
-            }
-        }).then((upVote) => {
-            if (upVote) {
-                db.UpVote.destroy({
-                        where: {
-                            id: upVote.dataValues.id
-                        }
-                    })
-                    .then(() => {
-                        db.Ling.findByPk(parseInt(req.query.lingId, 10)).then(ling => {
-                            let lingUpVote = ling.dataValues.upVote
-                            const incrmnt = lingUpVote - 1
-                            ling.update({
-                                upVote: incrmnt
-                            })
-                        }).then(
-                            res.redirect('/lingro')
-                        )
-                    })
-
-            } else if (!upVote) {
-                db.Ling.findByPk(parseInt(req.query.lingId, 10)).then(ling => {
-                    let lingUpVote = ling.dataValues.upVote
-                    const incrmnt = lingUpVote + 1
-                    ling.update({
-                            upVote: incrmnt
-                        })
-                        .then(ling => {
-                            db.UpVote.create({
-                                    type: true,
-                                    LingId: ling.dataValues.id,
-                                    UserId: req.session.user.id,
-                                })
-                                .then(() => {
-                                    res.redirect('/lingro')
-                                })
-                        })
-                })
-
-            }
-        })
-
-
-    }
-
-})
 
 
 app.route('/farm')
@@ -406,13 +334,13 @@ io.on('connection', (socket) => {
             })
         }
     })
-    db.UpVote.findAll({
-            attributes: {}
-        })
-        .then(like => {
-            io.emit('like', (like))
-            // console.log(like)
-        })
+    // db.UpVote.findAll({
+    //         attributes: {}
+    //     })
+    //     .then(like => {
+    //         io.emit('like', (like))
+    //         // console.log(like)
+    //     })
 })
 
 
@@ -438,7 +366,7 @@ app.use(function(req, res, next) {
 
 
 db.sequelize.sync({
-        force: true
+        // force: true
     })
     .then(function() {
         server.listen(PORT, function() {

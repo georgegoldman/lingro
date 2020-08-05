@@ -14,12 +14,13 @@
                 </div>
                 <div class="col-lg-4 col-12">
                     <div id="signUpPush"></div>
-                    <form  class="signInForm" >
+                    <form  class="signInForm" action="/signin" method="POST">
                         <fieldset class="form-group">
                             <legend class="form-group">signin</legend>
                             <div class="form-row">
                                 <div class="input-group col-lg-12 col-12">
                                     <input type="hidden" name="_csrf" value="{{csrfToken}}">
+                                    <input type="hidden" name="accountExist" id="AE" value="{{accountExist}}">
                                 </div>
                                 <div class="input-group col-lg-6 col-12  mb-3">
                                     <input type="text" name="email" placeholder="Email" id="signinEmail"

@@ -21,6 +21,8 @@
                             <div class="form-row">
                                 <div>
                                     <input type="hidden" name="_csrf" value="{{csrfToken}}">
+                                    <input type="hidden" name="accountExist" value="{{accountExist}}"  id="AE">
+                                    
                                 </div>
                                 <div class="col-lg-5  mb-3 input-group">
                                     <input type="text" name="name" placeholder="First Name" id=""
@@ -70,3 +72,5 @@
         </div>
     </div>
 </body>
+
+{{> scripts}}
