@@ -8,46 +8,28 @@
     {{> links}}
 </head>
 
-<body>
-    <nav class="navbar fixed-top navbar-expand-lg navbar-light " style="background-color:white;" id="lg-view" >
+<body id="bootstrap-overrides">
+    <div class="col-12">
         <div class="row">
-             <div class="col-md-4 col-lg-4">
-            <div class="row">
-                <a class="navbar-brand" href="/lingro"><img src="/img/logo/trie.png" height="37px" width="37" alt=""></a>
-                <a class="nav-item nav-link active" href="/lingro"><span class="align-text-bottom text-uppercase" style="font-size:large; line-height:3px ;">Home</span></a>
+            <div class="col-2">
+                <div id="nav">
+                    <a href="/lingro" class="col-12 mt-3 btn text-left"><img src="/img/logo/trie.png" height="33px" width="33px" alt=""></a>
+                    <a href="/lingro" class="col-12 btn text-left "><i class="fab fa-houzz"></i> Home</a>
+                    <a href="trends" class="col-12 btn text-left"><i class="fas fa-poll-h"></i> Trends</a>
+                    <a href="/notification" class="col-12 btn text-left"><i class="far fa-bell"></i> Notifcation</a>
+                    <a href="/chatRoom" class="col-12 btn text-left"><i class="far fa-envelope"></i> Dm(s)</a>
+                    <button class="col-12 btn text-left"><i class="fas fa-tractor"></i> Farm(s)</button>
+                    <button class="col-12 btn text-left"><i class="far fa-id-badge"></i> Profile</button>
+                    <button class="col-12 btn text-left"><i class="fas fa-cogs"></i> Account Settings</button>
+                    <button class="col-12 btn text-left"><i class="far fa-edit"></i> Create a Ling</button>
+                    <input type="search" class="input-group form-control mt-4" placeholder="ask lingro" name="" id="">
+                </div>
+            </div>
+            <div class="col-10">
+                {{{body}}}
             </div>
         </div>
-        <div class="col-md-3 col-lg-4"></div>
-        <div class="col-md-4 col-lg-4 ">
-            <div class="row float-right">
-                
-                <a class="nav-item nav-link" href="/trends"><i class="fas fa-hashtag"></i></a>
-                <a class="nav-item nav-link" href="/trends"><i class="fas fa-tractor"></i></a>
-                <a class="nav-item nav-link" href="#"><i class="far fa-bell"></i></a>
-                <a class="nav-item nav-link" href="/chatRoom"><i class="far fa-comments"></i></a>
-                <a class="nav-item nav-link" href="/updateProfile"><img class="rounded-circle" src="/img/{{user.ProfilePixes.0.pix}}" height="30px" width="30px" alt=""></a>
-                <a class="nav-item nav-link" id="myBtn" href="#" onclick="popup()"><i class="fas fa-chevron-down" style="color: blue;"></i></a>
-
-            </div>
-        </div>
-        </div>
-    </nav>
-             
-    <div class="col-md-12 mt-md-5">
-        <div class="row">
-        <div class="col-md-12 mt-md-4">
-            {{> popup}}
-            {{{body}}}
-        </div>
     </div>
-    </div>
-    <nav class="navbar fixed-bottom navbar-light" id="sm-view">
-        <div class="row">
-            <a class="nav-item nav-link active col-4 text-center" href="/cropbank"><i class="fas fa-house-user "></i></a>
-        <a class="nav-item nav-link col-4 text-center" href="#"><i class="far fa-bell"></i></a>
-        <a class="nav-item nav-link col-4 text-center" href="/updateProfile"><img class="rounded-circle" src="/img/{{user.ProfilePixes.0.pix}}" height="23px" width="23px" alt=""></a>
-        </div>
-    </nav>
 </body>
 <script src="/js/bootstrap.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
@@ -63,3 +45,4 @@
 <script src="/js/popup.js"></script>
 </html>
 
+{{> sw}}

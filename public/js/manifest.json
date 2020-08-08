@@ -1,0 +1,15 @@
+{
+    "name": "Lingro",
+    "short_name": "Lingro",
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff",
+    "display": "standalone",
+    "scope": "/",
+    "start_url": "https://http://lingro.herokuapp.com/",
+    "description": "An agricultural hub",
+    "orientation": "any",
+    "icons": [{
+        "src": "http://lingro.herokuapp.com/img/logo/trie.png",
+        "sizes": "1024x1024"
+    }]
+}

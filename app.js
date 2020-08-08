@@ -309,6 +309,15 @@ app.route('/trends')
         }
     })
 
+app.route('/notification')
+    .get(function(req, res) {
+        if (req.session.user && req.cookies.user_sid) {
+            res.render('notifications', {
+                layout: 'main'
+            })
+        }
+    })
+
 app.get('/settings', function(req, res) {
     if (req.session.user && req.cookies.user_sid) {
         res.render('settings', {

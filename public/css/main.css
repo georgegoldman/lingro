@@ -96,6 +96,22 @@ div#authBox {
 
 @media(min-width: 1224px) {
 
+    #autoresizing {
+        font-size: x-large;
+        height: 3em;
+        border-bottom: 3px solid whitesmoke;
+    }
+
+    #ling-home {
+        height: 100vh;
+        border-right: whitesmoke 2px solid;
+        border-left: whitesmoke 2px solid;
+    }
+
+    #trends {
+        border-left: whitesmoke 2px solid;
+    }
+
     #descriptionPush {
         height: 50%;
     }
@@ -153,7 +169,8 @@ div#authBox {
     }
 
     #msgBox::-webkit-scrollbar,
-    #ling-content::-webkit-scrollbar {
+    #ling-content::-webkit-scrollbar,
+    #ling-scroll::-webkit-scrollbar {
         width: 7px;
         height: 2px;
         display: none;
@@ -184,6 +201,15 @@ div#authBox {
 }
 
 @media(max-width: 480px) {
+    #nav-sm-btm {
+        position: absolute;
+        bottom: 0em;
+        top: 3em;
+    }
+
+    #sub-hiding-content {
+        height: 95vh;
+    }
 
     #authPush {
         height: 33vh;
