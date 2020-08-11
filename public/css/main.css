@@ -96,7 +96,7 @@ div#authBox {
     background-color: white;
 }
 
-@media(min-width: 1224px) {
+@media(min-width: 992px) {
     #ling-scroll {
         max-height: 77vh;
         min-height: 67vh;
@@ -214,10 +214,10 @@ div#authBox {
     }
 }
 
-@media(max-width: 480px) {
+@media(max-width: 768px) {
     #main-body {
-        max-height: 50vh;
-        min-height: 90vh;
+        max-height: 87vh;
+        min-height: 93vh;
     }
 
     #ling-home {
