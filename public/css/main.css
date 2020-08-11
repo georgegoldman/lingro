@@ -217,7 +217,7 @@ div#authBox {
 @media(max-width: 768px) {
     #main-body {
         max-height: 87vh;
-        min-height: 93vh;
+        min-height: 89vh;
     }
 
     #ling-home {
