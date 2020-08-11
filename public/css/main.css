@@ -221,13 +221,13 @@ div#authBox {
     }
 
     #ling-home {
-        min-height: 70vh;
-        max-height: 70vh;
+        min-height: 90vh;
+        max-height: 80vh;
     }
 
     #ling-scroll {
-        max-height: 85vh;
-        min-height: 85vh;
+        max-height: 86vh;
+        min-height: 80vh;
     }
 
     #nav-sm-btm {
