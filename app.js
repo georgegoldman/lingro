@@ -33,11 +33,6 @@ const salt = bcrypt.genSaltSync()
 // const favicon = require('serve-favicon')
 
 
-navigator.serviceWorker && navigator.serviceWorker.register('. / sw.js').then(function(registration) {
-    console.log('Excellent, registered with scope: ', registration.scope);
-});
-
-
 app.engine('.hbs', exphbs({
     extname: '.hbs'
 }))

@@ -74,6 +74,8 @@ div#authBox {
     width: 7px !important;
 }
 
+
+
 .div-scroll {
     overflow-y: scroll;
 }
@@ -95,11 +97,23 @@ div#authBox {
 }
 
 @media(min-width: 1224px) {
+    #ling-scroll {
+        max-height: 77vh;
+        min-height: 67vh;
+    }
+
+    .big-view {
+        display: none;
+    }
 
     #autoresizing {
         font-size: x-large;
-        height: 3em;
-        border-bottom: 3px solid whitesmoke;
+        height: 2em;
+        border: 3px solid whitesmoke;
+    }
+
+    #autoresizing:focus {
+        border: white solid thin;
     }
 
     #ling-home {
@@ -201,10 +215,29 @@ div#authBox {
 }
 
 @media(max-width: 480px) {
+    #main-body {
+        max-height: 50vh;
+        min-height: 90vh;
+    }
+
+    #ling-home {
+        min-height: 70vh;
+        max-height: 70vh;
+    }
+
+    #ling-scroll {
+        max-height: 85vh;
+        min-height: 85vh;
+    }
+
     #nav-sm-btm {
         position: absolute;
         bottom: 0em;
         top: 3em;
+    }
+
+    .small-view {
+        display: none;
     }
 
     #sub-hiding-content {
@@ -228,14 +261,6 @@ div#authBox {
 
     #news-box {
         display: none;
-    }
-
-    #lg-view {
-        display: none;
-    }
-
-    #sm-view {
-        display: block;
     }
 
     #advert-box {
