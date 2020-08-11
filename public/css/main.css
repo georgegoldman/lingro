@@ -216,7 +216,7 @@ div#authBox {
 
 @media(max-width: 768px) {
     #main-body {
-        max-height: 86vh;
+        max-height: 87vh;
         min-height: 89vh;
     }
 
