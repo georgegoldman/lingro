@@ -30,12 +30,12 @@ const {
     title
 } = require('process');
 const salt = bcrypt.genSaltSync()
-// const favicon = require('serve-favicon')
 
 
 app.engine('.hbs', exphbs({
     extname: '.hbs'
 }))
+
 app.set('view engine', '.hbs');
 app.use(express.static(__dirname + '/public'))
 app.use('/node_modules', express.static(__dirname + '/node_modules'));
