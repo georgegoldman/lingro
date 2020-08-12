@@ -96,10 +96,28 @@ div#authBox {
     background-color: white;
 }
 
+
+
 @media(min-width: 992px) {
+    #main-body {
+        max-height: 100%;
+        min-height: 100%;
+    }
+
+    #ling-home {
+        max-height: 100%;
+        min-height: 100%;
+    }
+
+    #title-bar {
+        height: 5%;
+        background-color: white;
+        border-bottom: whitesmoke solid thin;
+    }
+
     #ling-scroll {
-        max-height: 77vh;
-        min-height: 67vh;
+        max-height: 90%;
+        min-height: 90%;
     }
 
     .big-view {
@@ -215,22 +233,24 @@ div#authBox {
 }
 
 @media(max-width: 768px) {
-    #mobile-nav {
-        height: 6vh;
+    #main-body {
+        max-height: 93vh;
+        min-height: 93vh;
     }
 
-    #main-body {
-        min-height: 90vh;
+    #mobile-nav {
+        height: 7vh !important;
+        background-color: whitesmoke;
     }
 
     #ling-home {
-        min-height: 84vh;
-        max-height: 84vh;
+        min-height: 92vh;
+        max-height: 92vh;
     }
 
     #ling-scroll {
-        max-height: 84vh;
-        /* min-height: 75vh; */
+        max-height: 90vh;
+        min-height: 90vh;
     }
 
     #nav-sm-btm {

@@ -11,7 +11,7 @@
 <body id="bootstrap-overrides">
     <div class="col-12">
         <div class="row">
-            <div class="small-view col-lg-2">
+            <div class="small-view col-lg-2" style="background-color: whitesmoke;">
                 <div id="nav">
                     <a href="/lingro" class="col-12 mt-3 btn text-left"><img src="/img/logo/trie.png" height="33px" width="33px" alt=""></a>
                     <a href="/lingro" class="col-12 btn text-left "><i class="fas fa-home"></i> Home</a>
@@ -23,17 +23,18 @@
                     <button class="col-12 btn text-left"><i class="fas fa-cogs"></i> Account Settings</button>
                     <button class="col-12 btn text-left"><i class="far fa-edit"></i> Create a Ling</button>
                     <input type="search" class="input-group form-control mt-4" placeholder="ask lingro" name="" id="">
+                    <a class="col-12 btn text-left" href="/logout"><i class="fas fa-sign-out-alt"></i> signout</a>
                 </div>
             </div>
             <div class="col-lg-10 col-12" id="main-body" style="">
                 {{{body}}}
             </div>
-            <div class="col-12 big-view" id="mobile-nav" style="border-top: lightgray solid thin; background: white;" >
-                    <div class="row no-gutters mt-2">
-                        <a href="/lingro" class="btn col-3" style="font-size: x-large;"><i class="fas fa-home"></i></a>
-                        <a href="/lingro" class="btn col-3" style="font-size: x-large;"><i class="fas fa-seedling"></i></a>
-                        <a href="/notification" class="btn col-3" style="font-size: x-large;"><i class="far fa-bell"></i></a>
-                        <a href="/chatRoom" class="btn col-3" style="font-size: x-large;"><i class="far fa-envelope"></i></a>
+            <div class="col-12 big-view" id="mobile-nav" >
+                    <div class="row no-gutters" >
+                        <a href="/lingro" class="btn col-3" style="font-size: x-large;"><i class="fas text-primary fa-home"></i></a>
+                        <a href="/lingro" class="btn col-3" style="font-size: x-large;"><i class="fas text-success fa-seedling"></i></a>
+                        <a href="/notification" class="btn col-3" style="font-size: x-large;"><i class="far text-warning fa-bell"></i></a>
+                        <a href="/chatRoom" class="btn col-3" style="font-size: x-large;"><i class="far text-info fa-envelope"></i></a>
                     </div>
                 </div>
             </div>

@@ -9,7 +9,7 @@ $('#lingSubmitButton').click(function(evt) {
         dataType: 'json',
         success: function(data) {
             if (data.success) {
-                console.log(data.ling)
+                alert(data.ling)
             } else {
                 console.log('bad')
             }
