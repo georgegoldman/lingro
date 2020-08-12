@@ -234,23 +234,29 @@ div#authBox {
 
 @media(max-width: 768px) {
     #main-body {
-        max-height: 93vh;
-        min-height: 93vh;
+        max-height: 92vh;
+        min-height: 92vh;
     }
 
     #mobile-nav {
-        height: 7vh !important;
+        height: 8vh !important;
         background-color: whitesmoke;
     }
 
     #ling-home {
-        min-height: 92vh;
-        max-height: 92vh;
+        min-height: 89vh;
+        max-height: 89vh;
+    }
+
+    #title-bar {
+        height: 5%;
+        background-color: white;
+        border-bottom: whitesmoke solid thin;
     }
 
     #ling-scroll {
-        max-height: 90vh;
-        min-height: 90vh;
+        max-height: 87vh;
+        min-height: 87vh;
     }
 
     #nav-sm-btm {
