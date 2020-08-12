@@ -216,16 +216,16 @@ div#authBox {
 
 @media(max-width: 768px) {
     #main-body {
-        min-height: 87vh;
+        min-height: 93vh;
     }
 
     #ling-home {
-        min-height: 75vh;
-        max-height: 83vh;
+        min-height: 90vh;
+        max-height: 93vh;
     }
 
     #ling-scroll {
-        max-height: 80vh;
+        max-height: 86vh;
         /* min-height: 75vh; */
     }
 
