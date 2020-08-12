@@ -215,17 +215,21 @@ div#authBox {
 }
 
 @media(max-width: 768px) {
+    #mobile-nav {
+        height: 10vh;
+    }
+
     #main-body {
-        min-height: 91vh;
+        min-height: 87vh;
     }
 
     #ling-home {
-        min-height: 88vh;
-        max-height: 88vh;
+        min-height: 85vh;
+        max-height: 85vh;
     }
 
     #ling-scroll {
-        max-height: 86vh;
+        max-height: 82vh;
         /* min-height: 75vh; */
     }
 
