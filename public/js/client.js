@@ -55,13 +55,3 @@ if (document.querySelector('#AE').value == 'haveAccount') {
         open(window.origin + '/signup')
     }
 }
-
-document.addEventListener('input', function(event) {
-    if (event.target.tagName.toLowerCase() !== 'textarea') return;
-    autoExpand(event.target)
-}, false)
-
-var autoExpand = function(field) {
-    field.style.height = 'inherit';
-    field.style.height + 'px'
-}

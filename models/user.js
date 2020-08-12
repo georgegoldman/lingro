@@ -21,15 +21,6 @@ module.exports = (sequelize, DataTypes) => {
         User.hasMany(models.UserType, {
             onDelete: 'cascade'
         })
-        User.hasMany(models.Ling, {
-            onDelete: 'cascade'
-        })
-        User.hasMany(models.Reling, {
-            onDelete: 'cascade'
-        })
-        User.hasMany(models.UpVote, {
-            onDelete: 'cascade'
-        })
     };
     return User;
 };

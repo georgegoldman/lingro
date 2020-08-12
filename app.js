@@ -270,23 +270,10 @@ app.route('/chatRoom')
         }
     })
 app.route('/ling')
-    .get(csrfProtection, function(req, res) {
-        if (req.session.user && req.cookies.user_sid) {
-            res.render('ling', {
-                layout: 'main',
-                csrfToken: req.csrfToken(),
-                user: req.session.user
-            })
-        } else {
-            res.redirect('/signin')
-        }
-    })
     .post(function(req, res) {
-        db.Ling.create({
-            content: req.body.lings,
-            UserId: req.session.user.id
-        }).then(function() {
-            res.redirect('/lingro')
+        res.send({
+            success: true,
+            ling: req.body.ling
         })
     })
 // app.get('/testFetch', function(req, res) {
