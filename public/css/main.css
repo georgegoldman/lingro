@@ -234,12 +234,12 @@ div#authBox {
 
 @media(max-width: 768px) {
     #main-body {
-        max-height: 92vh;
-        min-height: 92vh;
+        max-height: 91.27vh;
+        min-height: 91.27vh;
     }
 
     #mobile-nav {
-        height: 8vh !important;
+        height: 8.7vh !important;
         background-color: whitesmoke;
     }
 
@@ -249,7 +249,7 @@ div#authBox {
     }
 
     #title-bar {
-        height: 5%;
+        height: 6%;
         background-color: white;
         border-bottom: whitesmoke solid thin;
     }
