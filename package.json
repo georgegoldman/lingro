@@ -28,7 +28,7 @@
         "sequelize-auto-migrations": "github:scimonster/sequelize-auto-migrations#a063aa6535a3f580623581bf866cef2d609531ba",
         "serve-favicon": "^2.5.0",
         "sharp": "^0.25.2",
-        "socket.io": "^2.3.0",
+        "socket.io": "^2.4.0",
         "uuid": "^8.0.0"
     },
     "devDependencies": {
